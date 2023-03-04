@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Comment;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,9 +26,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-        Post::factory(5)->create();
-
-
-
+        Comment::factory(5)->create();
     }
 }

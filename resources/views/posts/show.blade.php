@@ -35,11 +35,34 @@
         </div>
     </div>
     {{-- Comment section --}}
-    <section class="flex justify-center ">
+    <section class="flex flex-col items-center space-y-10">
+
+        <form class="flex rounded-xl flex-col space-y-4 border border-gray-600 px-5  py-4 max-w-[350px] md:max-w-none"
+            action="/posts/{{ $post->slug }}/comments" method="post">
+            @csrf
+            <header class="flex pb-3 items-center space-x-2 border-b border-gray-100">
+                <img class="rounded-full" src="https://i.pravatar.cc/60?u={{ auth()->id() }}" alt="">
+                <p>Want to participate? </p>
+            </header>
+
+            <textarea class="px-3 border-b border-black" placeholder="quick say something! " name="body" id=""
+                cols="40" rows="4">
+            </textarea>
+            @error('body')
+                <p class="text-sm text-red-500">{{ $message }}</p>
+            @enderror
+
+            <button class="self-end border border-blue-700 px-2 py-1 rounded-xl bg-blue-600 text-white"
+                type="submit">Post</button>
+
+        </form>
+
         <div class="flex flex-col space-y-6">
-            <x-post-comment />
-            <x-post-comment />
-            <x-post-comment />
+            @foreach ($post->comments->reverse() as $comment)
+                <x-post-comment :comment="$comment" />
+            @endforeach
         </div>
     </section>
+    <x-flash />
+
 </x-layout>
