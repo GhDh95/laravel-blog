@@ -45,15 +45,19 @@
                 <p>Want to participate? </p>
             </header>
 
-            <textarea class="px-3 border-b border-black" placeholder="quick say something! " name="body" id=""
-                cols="40" rows="4">
-            </textarea>
-            @error('body')
-                <p class="text-sm text-red-500">{{ $message }}</p>
-            @enderror
+            @auth
+                <textarea value="{{ old('body') }}" class="px-3 border-b border-black" placeholder="quick say something! "
+                    name="body" id="" cols="40" rows="4">
+                </textarea>
+                @error('body')
+                    <p class="text-sm text-red-500">{{ $message }}</p>
+                @enderror
 
-            <button class="self-end border border-blue-700 px-2 py-1 rounded-xl bg-blue-600 text-white"
-                type="submit">Post</button>
+                <button class="self-end border border-blue-700 px-2 py-1 rounded-xl bg-blue-600 text-white"
+                    type="submit">Post</button>
+            @else
+                <a class="hover:underline self-end" href="/login">login</a>
+            @endauth
 
         </form>
 
