@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -27,5 +25,13 @@ class PostController extends Controller
             'post' => $post
 
         ]);
+    }
+
+    public function create()
+    {
+        if (auth()->user()?->username != 'Ghassen') {
+            abort(403);
+        }
+        return view('posts.create');
     }
 }
