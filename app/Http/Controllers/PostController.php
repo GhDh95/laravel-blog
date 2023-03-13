@@ -29,9 +29,27 @@ class PostController extends Controller
 
     public function create()
     {
-        if (auth()->user()?->username != 'Ghassen') {
-            abort(403);
-        }
         return view('posts.create');
+    }
+
+    public function store()
+    {
+
+
+
+        $attributes =
+            request()->validate([
+                'title' => ['required'],
+                'slug' => ['required', 'unique:posts,slug'],
+                'excerpt' => ['required'],
+                'body' => ['required'],
+                'category_id' => ['required', 'exists:categories,id']
+            ]);
+
+
+        $attributes['user_id'] = auth()->id();
+        Post::create($attributes);
+
+        return redirect('/')->with('success', 'Your Post has been created.');
     }
 }
