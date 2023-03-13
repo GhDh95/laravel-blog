@@ -15,7 +15,7 @@
         </a>
         <div class="flex flex-col md:flex md:flex-row justify-center space-x-10 md:px-96">
             <div class="min-w-[240px]">
-                <img class="h-[200px] w-[240px] rounded-lg" src="/images/illustration-1.png" alt="">
+                <img class="h-[200px] w-[240px] rounded-lg" src="/storage/{{ $post->thumbnail }}" alt="">
                 <p class="text-center py-3  text-sm text-gray-600">Published {{ $post->created_at->diffForHumans() }}
                 </p>
                 <div class="flex items-center">
